@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@vue/cli-plugin-eslint": "^5.0.8"
+  }
+}
