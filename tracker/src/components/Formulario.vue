@@ -8,11 +8,7 @@
             </div>
             <div class="column">
                     <div class="is-flex is-align-items-center is-justify-content-space-between">
-                        <section>
-                            <strong>
-                                {{ timePassad }}
-                            </strong>
-                        </section>
+                        <Cronometro :timeInSeconds='timeInSeconds'/>
                         <button class="button" @click="startTimer">
                             <span class="icon">
                                 <i class="fas fa-play" />
@@ -33,28 +29,27 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Cronometro from './Cronometro.vue'
 
 export default defineComponent({
     name: 'FormularioTarefa',
+    components: {
+        Cronometro
+    },
     data () {
         return {
-            timeInSeconds: 0
-        }
-    },
-    computed: {
-        timePassad () : string {
-            return new Date(this.timeInSeconds * 1000).toISOString().substr(11, 8)
+            timeInSeconds: 0,
+            cronometro: 0
         }
     },
     methods: {
         startTimer () {
-            setInterval(() => { // Contar tempo de duração
+            this.cronometro = setInterval(() => { // Contar tempo de duração
                 this.timeInSeconds += 1
             }, 1000) // 1 second = 1000 milliseconds
-            console.log("Inciando o timer")
         },
         stopTimer () {
-            console.log("Parando o timer")
+            clearInterval(this.cronometro)
         }
     }
 })
