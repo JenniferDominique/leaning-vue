@@ -3,11 +3,20 @@
 <template>
     <div class="box">
         <div class="columns">
-            <div class="column is-8" role="form" aria-label="Form para criar uma nova tarefa">
-                <input type="text" class="input" placeholder="Nome da nova atividade" />
+            <div 
+                class="column is-8" 
+                role="form" 
+                aria-label="Form para criar uma nova tarefa"
+            >
+                <input 
+                    type="text" 
+                    class="input" 
+                    placeholder="Nome da nova atividade"
+                    v-model="taskDescription"
+                />
             </div>
             <div class="column">
-                <Temporizador/>
+                <Temporizador @whenTimeStoped="endTask"/>
             </div>
         </div>
     </div>
@@ -21,6 +30,16 @@ export default defineComponent({
     name: 'Formulario',
     components: {
         Temporizador
+    },
+    data () {
+       return {
+        taskDescription: ''
+       }
+    },
+    methods: {
+        endTask (timePassed: number) : void {
+            this.taskDescription = ''
+        }
     }
 })
 </script>
