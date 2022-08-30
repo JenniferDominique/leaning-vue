@@ -30,6 +30,7 @@
     
     export default defineComponent({
         name: 'Temporizador',
+        emits: ['whenTimeStoped'],
         components: {
             Cronometro
         },
@@ -51,6 +52,8 @@
             stopTimer() {
                 clearInterval(this.cronometro)
                 this.cronometroRodando = false
+                this.$emit('whenTimeStoped', this.timeInSeconds)
+                this.timeInSeconds = 0
             }
         }
     })
