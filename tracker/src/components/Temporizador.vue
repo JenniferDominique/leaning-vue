@@ -1,39 +1,33 @@
 <template>
     <div class="is-flex is-align-items-center is-justify-content-space-between">
         <Cronometro :timeInSeconds='timeInSeconds' /> <!--O ':' quer dizer que esta lincado com o atributo(data) -->
-        <button 
-            class="button" 
-            @click="startTimer"
-            :disabled="cronometroRodando"
-        >
-            <span class="icon">
-                <i class="fas fa-play" />
-            </span>
-            <span>Play</span>
-        </button>
-        <button 
-            class="button" 
-            @click="stopTimer"
-            :disabled="!cronometroRodando"
-        >
-            <span class="icon">
-                <i class="fas fa-stop" />
-            </span>
-            <span>Pausa</span>
-        </button>
+        <Botao 
+            @clicado="startTimer" 
+            icone="fas fa-play" 
+            texto="play" 
+            :desabilitado="cronometroRodando" 
+        />
+        <Botao 
+            @clicado="stopTimer" 
+            icone="fas fa-stop" 
+            texto="stop" 
+            :desabilitado="!cronometroRodando" 
+        />
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from 'vue'
     import Cronometro from './Cronometro.vue'
+    import Botao from './Botao.vue'
     
     export default defineComponent({
         name: 'Temporizador',
-        emits: ['whenTimeStoped'],
         components: {
-            Cronometro
+            Cronometro,
+            Botao
         },
+        emits: ['whenTimeStoped'],
         data() {
             return {
                 timeInSeconds: 0,
